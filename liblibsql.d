@@ -1,0 +1,1 @@
+/Users/dennis/Desktop/libsql-ocaml/libsql-c/target/release/liblibsql.dylib: /Users/dennis/Desktop/libsql-ocaml/libsql-c/macros/src/lib.rs /Users/dennis/Desktop/libsql-ocaml/libsql-c/src/bindings.rs /Users/dennis/Desktop/libsql-ocaml/libsql-c/src/lib.rs
