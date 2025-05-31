@@ -1,6 +1,7 @@
 # Playing with ocamlc and ocamlopt compilation and linking with C libraries.
 
 
+## Mymath
 
 1. This uses the ocaml bytecode compiler. It outputs a `mymath.cmi`, aka compiled interface, and `mymath.cmo`, bytecode library archive.
 ```
@@ -47,3 +48,35 @@ ocamlc -o test mymath.cma test.ml
 ```
 ./test
 ```
+
+
+## Libsql
+
+`ocamlopt -o test_libsql_native libsql.cmxa libsql_stubs.o test_libsql.ml -cclib -llibsql -ccopt -L.`
+
+
+```
+Warning 26 [unused-var]: unused variable file_conn.
+ld: warning: ignoring duplicate libraries: '-llibsql'
+Undefined symbols for architecture arm64:
+  "_caml_libsql_database_connect", referenced from:
+      _camlLibsql.code_begin in libsql.a[2](libsql.o)
+      _camlLibsql.data_begin in libsql.a[2](libsql.o)
+  "_caml_libsql_database_init", referenced from:
+      _camlLibsql.code_begin in libsql.a[2](libsql.o)
+      _camlLibsql.data_begin in libsql.a[2](libsql.o)
+  "_caml_libsql_setup", referenced from:
+      _camlLibsql.code_begin in libsql.a[2](libsql.o)
+      _camlLibsql.data_begin in libsql.a[2](libsql.o)
+ld: symbol(s) not found for architecture arm64
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+
+```
+
+The solution was to explicitly include the C stubs object file (libsql_stubs.o) when compiling the native version.
+
+Bytecode: `ocamlc -o test_libsql libsql.cma test_libsql.ml`
+The .cma automatically handles the C stubs through dynamic loading
+
+Native code: `ocamlopt -o test_libsql_native libsql.cmxa libsql_stubs.o test_libsql.ml -cclib -llibsql -ccopt -L.`
+We need to explicitly include libsql_stubs.o because the .cmxa file doesn't automatically include C stubs for static linking.
