@@ -6,6 +6,7 @@
   (language c)
   (names libsql_stubs)
   (flags (-I.)))
- (extra_objects liblibsql)
+ (foreign_archives libsql)
+ (c_library_flags (-framework CoreFoundation -framework Security))
  (modules libsql)
  (modes native))
