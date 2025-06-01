@@ -1,3 +1,4 @@
 (test
  (name test_libsql)
- (libraries libsql))
+ (libraries libsql)
+ (flags (-cclib -lliblibsql -ccopt -L.)))
