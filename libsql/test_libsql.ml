@@ -6,12 +6,12 @@ let () =
     
     (* Test opening an in-memory database *)
     Printf.printf "Opening in-memory database...\n";
-    let conn = open_memory_database () in
+    let _conn = open_memory_database () in
     Printf.printf "Success! Database connection established.\n";
     
     (* Test opening a file database *)
     Printf.printf "Opening file database...\n";
-    let file_conn = open_database "test.db" in
+    let _file_conn = open_database "test.db" in
     Printf.printf "Success! File database connection established.\n";
     
     Printf.printf "All tests passed!\n"
