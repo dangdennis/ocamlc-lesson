@@ -5,6 +5,7 @@
  (foreign_stubs
   (language c)
   (names libsql_stubs)
-  (flags (-L. -lliblibsql)))
+  (flags (-I.)))
+ (extra_objects liblibsql)
  (modules libsql)
  (modes native))
