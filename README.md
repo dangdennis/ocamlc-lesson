@@ -8,7 +8,8 @@
 2. `ocamlopt -I . -c libsql.ml`
     - generates `libsql.cmi`, `libsql.cmx`, `libsql.o`
 3. `ocamlopt -a -o libsql.cmxa libsql.cmx libsql_stubs.c liblibsql.a`
-    - generates `
+    - generates `libsql_stubs.o`, `libsql.a`, `libsql.cmxa`
+    - resulting .cmxa and .a files work together: the .cmxa tells OCaml about the library structure, while the .a contains all the actual compiled code that gets linked into your final executable.
 
 `ocamlopt -o test_libsql_native libsql.cmxa libsql_stubs.o test_libsql.ml -cclib -llibsql -ccopt -L.`
 
