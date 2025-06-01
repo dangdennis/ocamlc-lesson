@@ -1,0 +1,10 @@
+(library
+ (name libsql)
+ (public_name libsql)
+ (libraries unix)
+ (foreign_stubs
+  (language c)
+  (names libsql_stubs)
+  (flags (-L. -lliblibsql)))
+ (modules libsql)
+ (modes native))
